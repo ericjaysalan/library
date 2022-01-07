@@ -13,39 +13,8 @@
       <h1>Library App</h1>
       <button id="new-book-btn">New Book</button>
     </header>
-    <div id="library">
-      <div class="book">
-        <div class="top-div">
-          <div>
-            <h3>Title</h3>
-            <p>The Lightning Thief</p>
-          </div>
-          <button class="delete-book">&times;</button>
-        </div>
-
-        <div>
-          <h3>Author</h3>
-          <p>Rick Riordan</p>
-        </div>
-
-        <div>
-          <h3>Pages</h3>
-          <p>123</p>
-        </div>
-
-        <div>
-          <label for="read">
-            <input type="checkbox" id="read" />
-            Read
-          </label>
-
-          <label for="not-read">
-            <input type="checkbox" id="not-read" />
-            Not Read
-          </label>
-        </div>
-      </div>
-    </div>
+    <!-- Books go here -->
+    <div id="library"></div>
     <div id="form-modal">
       <div id="form-header">
         <h2>Book Form</h2>
@@ -60,17 +29,17 @@
           <input type="text" name="author" id="author" required />
 
           <label for="book-pages">Pages</label>
-          <input type="text" name="pages" id="pages" required />
+          <input type="number" id="pages" name="pages" min="1" max="10000" />
 
           <div id="radio">
             <label for="read">
-              Read
               <input type="radio" name="read-book" id="read" checked />
+              Read
             </label>
 
             <label for="not-read">
-              Not Read
               <input type="radio" name="read-book" id="not-read" />
+              Not Read
             </label>
           </div>
           <input type="submit" value="Submit" id="submit" />

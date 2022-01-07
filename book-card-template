@@ -1,0 +1,29 @@
+<div class="book">
+  <div class="top-div">
+    <div class="title">
+      <h3>Title</h3>
+      <p>The Lightning Thief</p>
+    </div>
+    <button class="delete-book">&times;</button>
+  </div>
+
+  <div class="author">
+    <h3>Author</h3>
+    <p>Rick Riordan</p>
+  </div>
+
+  <div class="pages">
+    <h3>Pages</h3>
+    <p>123</p>
+  </div>
+
+  <label for="read">
+    <input type="radio" id="read" name="read-book" />
+    Read
+  </label>
+
+  <label for="not-read">
+    <input type="radio" id="not-read" name="read-book" />
+    Not Read
+  </label>
+</div>

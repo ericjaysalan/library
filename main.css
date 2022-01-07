@@ -54,7 +54,7 @@ header button {
 /* Main Start */
 #library {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 1rem;
   padding: 2rem 3rem;
 }
@@ -129,6 +129,11 @@ h3 {
 
 #form-modal.active {
   display: block;
+}
+
+#form-modal #radio {
+  display: flex;
+  justify-content: space-evenly;
 }
 
 #form-header {
