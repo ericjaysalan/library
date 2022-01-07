@@ -1,0 +1,182 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@600&display=swap');
+
+:root {
+  --dodger-blue: #1098f7;
+  --medium-sea-green: #06ba63;
+  --bright-lilac: #cb9cf2;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  height: 100vh;
+
+  color: #000;
+  background-color: var(--medium-sea-green);
+  font-family: 'Montserrat', Verdana, sans-serif;
+}
+
+/* Header Start */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  background-color: var(--dodger-blue);
+  box-shadow: 0.1rem 0.1rem 0.5rem #000;
+}
+
+header h1 {
+  padding: 0.5rem 1rem;
+
+  font-size: 2.5rem;
+  font-weight: bolder;
+  color: #fff;
+}
+
+header button {
+  border: none;
+  border-radius: 5px;
+  padding: 0.3rem 1rem;
+  margin-right: 1rem;
+
+  font-size: 1.3rem;
+  font-weight: 300;
+  background-color: var(--bright-lilac);
+  color: #fff;
+  cursor: pointer;
+}
+
+/* Main Start */
+#library {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  padding: 2rem 3rem;
+}
+
+#library .book {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem 1.5rem;
+  border-radius: 1rem;
+
+  background-color: #cb9cf2;
+  color: #fff;
+}
+
+.top-div {
+  display: flex;
+  justify-content: space-between;
+}
+
+.delete-book {
+  align-self: flex-start;
+  border: none;
+
+  font-size: 1.5rem;
+  background: none;
+  cursor: pointer;
+}
+
+.book > * {
+  padding-bottom: 1rem;
+}
+
+.book h2,
+h3 {
+  font-size: 1.5rem;
+  color: #000;
+}
+
+/* Form and Overlay */
+#overlay {
+  opacity: 0;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  pointer-events: none;
+}
+
+#overlay.active {
+  opacity: 1;
+  pointer-events: all;
+  cursor: pointer;
+}
+
+#form-modal {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  border-radius: 2rem;
+  width: 40rem;
+  min-width: 10rem;
+  max-width: 50rem;
+
+  background-color: #fff;
+  z-index: 10;
+}
+
+#form-modal.active {
+  display: block;
+}
+
+#form-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 1rem 2rem;
+  border-top-left-radius: inherit;
+  border-top-right-radius: inherit;
+
+  background-color: var(--dodger-blue);
+}
+
+#form-header h2 {
+  font-size: 2.3rem;
+  font-weight: bolder;
+}
+
+#close-form {
+  padding: 0.5rem;
+  background: none;
+  border: none;
+  outline: none;
+
+  cursor: pointer;
+  font-size: 2.5rem;
+  font-weight: 400;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 1rem 2rem;
+}
+
+input {
+  padding: 0.25rem;
+  margin-bottom: 1rem;
+  border: 0.5px solid #000;
+  border-radius: 10px;
+}
+
+input[type='submit'] {
+  align-self: center;
+  padding: 0.5rem 3rem;
+  border: none;
+  font-weight: bold;
+  letter-spacing: 0.1rem;
+}
