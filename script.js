@@ -9,7 +9,7 @@ const formPages = document.getElementById('pages');
 const formRadio = document.getElementById('radio');
 const closeButton = document.getElementById('close-form');
 
-let myLibrary = [];
+let libraryObjects = [];
 
 class Book {
   constructor(title, author, pages, read) {
@@ -17,6 +17,93 @@ class Book {
     this.author = author;
     this.pages = pages;
     this.read = read;
+  }
+
+  static cardCounter = 0;
+
+  createCard() {
+    const card = document.createElement('div');
+
+    const firstDiv = document.createElement('div');
+    const secondDiv = document.createElement('div');
+    const thirdDiv = document.createElement('div');
+
+    const titleDiv = document.createElement('div');
+    const deleteButton = document.createElement('button');
+
+    const titleHeading = document.createElement('h3');
+    const authorHeading = document.createElement('h3');
+    const pagesHeading = document.createElement('h3');
+
+    const title = document.createElement('p');
+    const author = document.createElement('p');
+    const pages = document.createElement('p');
+
+    const label1 = document.createElement('label');
+    const label2 = document.createElement('label');
+    const radio1 = document.createElement('input');
+    const radio2 = document.createElement('input');
+
+    card.className = 'book';
+
+    firstDiv.className = 'top-div';
+    secondDiv.className = 'author';
+    thirdDiv.className = 'pages';
+
+    titleHeading.innerText = 'Title';
+    authorHeading.innerText = 'Author';
+    pagesHeading.innerText = 'Pages';
+
+    title.innerText = this.title;
+    author.innerText = this.author;
+    pages.innerText = this.pages;
+
+    titleDiv.className = 'title';
+    deleteButton.className = 'delete-book';
+    deleteButton.innerHTML = '&times;';
+
+    label1.setAttribute('for', `read${Book.cardCounter}`);
+    label2.setAttribute('for', `not-read${Book.cardCounter}`);
+
+    radio1.setAttribute('type', 'radio');
+    radio1.setAttribute('id', `read${Book.cardCounter}`);
+    radio1.setAttribute('name', `read-book${Book.cardCounter}`);
+
+    radio2.setAttribute('type', 'radio');
+    radio2.setAttribute('id', `not-read${Book.cardCounter}`);
+    radio2.setAttribute('name', `read-book${Book.cardCounter}`);
+
+    if (this.read) radio1.setAttribute('checked', true);
+    else radio2.setAttribute('checked', true);
+
+    firstDiv.appendChild(titleDiv);
+    titleDiv.appendChild(titleHeading);
+    titleDiv.appendChild(title);
+    firstDiv.appendChild(deleteButton);
+    secondDiv.appendChild(authorHeading);
+    secondDiv.appendChild(author);
+    thirdDiv.appendChild(pagesHeading);
+    thirdDiv.appendChild(pages);
+
+    label1.appendChild(radio1);
+    label2.appendChild(radio2);
+    label1.appendChild(document.createTextNode(' Read'));
+    label2.appendChild(document.createTextNode(' Not Read'));
+
+    card.appendChild(firstDiv);
+    card.appendChild(secondDiv);
+    card.appendChild(thirdDiv);
+    card.appendChild(label1);
+    card.appendChild(label2);
+
+    library.appendChild(card);
+    Book.cardCounter++;
+
+    deleteButton.addEventListener('click', () => {
+      const thisIndex = libraryObjects.findIndex((obj) => obj === this);
+      libraryObjects.splice(thisIndex, 1);
+      card.remove();
+    });
   }
 }
 
@@ -37,105 +124,9 @@ function openForm() {
   overlay.classList.add('active');
 }
 
-/* function hasBookCard(bookObject) {
-  let bookCards = Array.from(library.children);
-  bookCards.forEach((bookCard) => {
-    console.log(bookCard);
-
-    return true;
-  });
-} */
-
-function createBookCards(book) {
-  const index = myLibrary.indexOf(book);
-
-  const newBookCard = document.createElement('div');
-
-  const firstDiv = document.createElement('div');
-  const secondDiv = document.createElement('div');
-  const thirdDiv = document.createElement('div');
-
-  const titleDiv = document.createElement('div');
-  const deleteButton = document.createElement('button');
-
-  const titleHeading = document.createElement('h3');
-  const authorHeading = document.createElement('h3');
-  const pagesHeading = document.createElement('h3');
-
-  const title = document.createElement('p');
-  const author = document.createElement('p');
-  const pages = document.createElement('p');
-
-  const label1 = document.createElement('label');
-  const label2 = document.createElement('label');
-  const radio1 = document.createElement('input');
-  const radio2 = document.createElement('input');
-
-  newBookCard.className = 'book';
-
-  firstDiv.className = 'top-div';
-  secondDiv.className = 'author';
-  thirdDiv.className = 'pages';
-
-  titleHeading.innerText = 'Title';
-  authorHeading.innerText = 'Author';
-  pagesHeading.innerText = 'Pages';
-
-  title.innerText = book.title;
-  author.innerText = book.author;
-  pages.innerText = book.pages;
-
-  titleDiv.className = 'title';
-  deleteButton.className = 'delete-book';
-  deleteButton.innerHTML = '&times;';
-
-  label1.setAttribute('for', `read${index}`);
-  label2.setAttribute('for', `not-read${index}`);
-
-  radio1.setAttribute('type', 'radio');
-  radio1.setAttribute('id', `read${index}`);
-  radio1.setAttribute('name', `read-book${index}`);
-
-  radio2.setAttribute('type', 'radio');
-  radio2.setAttribute('id', `not-read${index}`);
-  radio2.setAttribute('name', `read-book${index}`);
-
-  if (book.read) radio1.setAttribute('checked', true);
-  else radio2.setAttribute('checked', true);
-
-  firstDiv.appendChild(titleDiv);
-  titleDiv.appendChild(titleHeading);
-  titleDiv.appendChild(title);
-  firstDiv.appendChild(deleteButton);
-  secondDiv.appendChild(authorHeading);
-  secondDiv.appendChild(author);
-  thirdDiv.appendChild(pagesHeading);
-  thirdDiv.appendChild(pages);
-
-  label1.appendChild(radio1);
-  label2.appendChild(radio2);
-  label1.appendChild(document.createTextNode(' Read'));
-  label2.appendChild(document.createTextNode(' Not Read'));
-
-  newBookCard.appendChild(firstDiv);
-  newBookCard.appendChild(secondDiv);
-  newBookCard.appendChild(thirdDiv);
-  newBookCard.appendChild(label1);
-  newBookCard.appendChild(label2);
-
-  library.appendChild(newBookCard);
-}
-
 function addBookToLibrary(book) {
-  myLibrary.push(book);
-  console.log(myLibrary);
-
-  myLibrary.forEach((book) => {
-    /* if (hasBookCard(book)) {
-      createBookCards();
-    } */
-    createBookCards(book);
-  });
+  libraryObjects.push(book);
+  book.createCard();
 }
 
 function getInput(e) {
