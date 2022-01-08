@@ -9,8 +9,6 @@ const formPages = document.getElementById('pages');
 const formRadio = document.getElementById('radio');
 const closeButton = document.getElementById('close-form');
 
-let libraryObjects = [];
-
 class Book {
   constructor(title, author, pages, read) {
     this.title = title;
@@ -19,7 +17,12 @@ class Book {
     this.read = read;
   }
 
+  static library = [];
   static cardCounter = 0;
+
+  addToLibrary() {
+    Book.library.push(this);
+  }
 
   createCard() {
     const card = document.createElement('div');
@@ -127,11 +130,6 @@ function openForm() {
   overlay.classList.add('active');
 }
 
-function addBookToLibrary(book) {
-  libraryObjects.push(book);
-  book.createCard();
-}
-
 function getInput(e) {
   e.preventDefault();
 
@@ -141,7 +139,8 @@ function getInput(e) {
   let read = radio.firstElementChild.firstElementChild.checked ? true : false;
 
   const book = new Book(title, author, pages, read);
-  addBookToLibrary(book);
+  book.addToLibrary();
+  book.createCard();
   resetForm();
   closeForm();
 }
