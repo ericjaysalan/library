@@ -104,6 +104,9 @@ class Book {
       libraryObjects.splice(thisIndex, 1);
       card.remove();
     });
+
+    radio1.addEventListener('click', () => (this.read = true));
+    radio2.addEventListener('click', () => (this.read = false));
   }
 }
 
